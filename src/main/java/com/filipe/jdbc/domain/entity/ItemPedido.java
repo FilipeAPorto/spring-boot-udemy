@@ -1,4 +1,4 @@
-package com.filipe.domain.entity;
+package com.filipe.jdbc.domain.entity;
 
 public class ItemPedido {
 

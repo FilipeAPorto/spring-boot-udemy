@@ -1,4 +1,4 @@
-package com.filipe.domain.entity;
+package com.filipe.jdbc.domain.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

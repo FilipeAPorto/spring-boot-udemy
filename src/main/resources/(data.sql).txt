@@ -22,3 +22,5 @@ create table item_pedido (
     produto_id INTEGER REFERENCES produto (ID),
     quantidade INTEGER
 );
+
+Usado para criar tabelas no Banco de dados virtual do curso na parte de JDBC
