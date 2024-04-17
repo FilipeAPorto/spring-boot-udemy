@@ -1,6 +1,7 @@
 package com.filipe.jparepository.domain.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -11,7 +12,7 @@ import java.util.List;
 public class Pedido {
 
     @Id //Seta o atributo como ID
-    @GeneratedValue(strategy = GenerationType.AUTO) //AutoIncremento
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //AutoIncremento
     @Column(name = "id") //Caso o nome da coluna seja diferente do nome do atributo.
     private Integer id;
 
@@ -20,9 +21,11 @@ public class Pedido {
     private Cliente cliente;  //mappedBy aqui
 
     @Column(name = "data_pedido")
+    @NotBlank
     private LocalDate dataPedido;
 
     @Column(name = "total", precision = 20, scale = 2) // Digitos totais = 20 , quantas casas decimais = 2
+    @NotBlank
     private BigDecimal total;
 
     @OneToMany(mappedBy = "pedido")
