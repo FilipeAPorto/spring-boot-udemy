@@ -2,6 +2,7 @@ package com.filipe.jparepository.rest.controller;
 
 import com.filipe.jparepository.domain.entity.Cliente;
 import com.filipe.jparepository.domain.repository.Clientes;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -28,7 +29,7 @@ public class ClienteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED) //Retorna o Status Creado na web
-    public Cliente salvarClientes(@RequestBody Cliente cliente) {
+    public Cliente salvarClientes(@RequestBody @Valid Cliente cliente) {
         return clienteRepository.save(cliente);
     }
 
@@ -44,7 +45,7 @@ public class ClienteController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void atualizarIntegralmenteCliente(@PathVariable Integer id, @RequestBody Cliente cliente) {
+    public void atualizarIntegralmenteCliente(@PathVariable Integer id, @RequestBody @Valid Cliente cliente) {
 
         clienteRepository.findById(id).map(c -> {
             cliente.setId(c.getId());

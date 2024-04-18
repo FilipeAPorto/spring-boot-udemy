@@ -2,9 +2,11 @@ package com.filipe.jparepository.domain.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
@@ -21,12 +23,12 @@ public class Produto {
     private Integer id;
 
     @Column(name = "descricao")
-    @NotBlank
+    @NotEmpty(message = "Campo Descrição é Obrigatório.")
     private String descricao;
 
     @Column(name = "preco_unitario")
     @Min(0)
-    @NotNull
+    @NotNull(message = "Campo Preço é obrigatório")
     private BigDecimal preco;
 
 }

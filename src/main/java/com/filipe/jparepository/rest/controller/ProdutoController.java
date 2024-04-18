@@ -2,6 +2,7 @@ package com.filipe.jparepository.rest.controller;
 
 import com.filipe.jparepository.domain.entity.Produto;
 import com.filipe.jparepository.domain.repository.Produtos;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -25,7 +26,7 @@ public class ProdutoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Produto salvarProduto(@RequestBody Produto produto) {
+    public Produto salvarProduto(@RequestBody @Valid Produto produto) {
         return produtoRepository.save(produto);
     }
 
@@ -40,7 +41,7 @@ public class ProdutoController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void atualizarProduto(@PathVariable Integer id, @RequestBody Produto produto) {
+    public void atualizarProduto(@PathVariable Integer id, @RequestBody @Valid Produto produto) {
         produtoRepository.findById(id).map(p -> {
             produto.setId(p.getId());
             produtoRepository.save(produto);
@@ -52,7 +53,7 @@ public class ProdutoController {
     public List<Produto> listarProdutos(Produto filtroProduto) {
         ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
 
-        Example example = Example.of(filtroProduto,matcher);
+        Example example = Example.of(filtroProduto, matcher);
 
         return produtoRepository.findAll(example);
     }

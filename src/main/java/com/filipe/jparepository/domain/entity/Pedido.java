@@ -1,5 +1,6 @@
 package com.filipe.jparepository.domain.entity;
 
+import com.filipe.jparepository.domain.enums.StatusPedido;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -33,6 +34,10 @@ public class Pedido {
     @Column(name = "total", precision = 20, scale = 2) // Digitos totais = 20 , quantas casas decimais = 2
     @NotNull
     private BigDecimal total;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private StatusPedido status; //Forma de criar Status para confirmação
 
     @OneToMany(mappedBy = "pedido")
     private List<ItemPedido> itens;

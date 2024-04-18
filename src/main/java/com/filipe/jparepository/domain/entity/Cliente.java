@@ -2,10 +2,11 @@ package com.filipe.jparepository.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.util.List;
 
@@ -23,11 +24,12 @@ public class Cliente {
     private Integer id;
 
     @Column(name = "nome", length = 100) //Caso o nome da coluna seja diferente do nome do atributo.
-    @NotBlank
+    @NotEmpty(message = "Campo nome é obrigatório.")
     private String nome;
 
     @Column(name = "cpf", length = 11)
-    @NotBlank
+    @NotEmpty(message = "Campo CPF é obrigatório.")
+    @CPF(message = "Informe um CPF Válido.")
     private String cpf;
 
     @JsonIgnore
