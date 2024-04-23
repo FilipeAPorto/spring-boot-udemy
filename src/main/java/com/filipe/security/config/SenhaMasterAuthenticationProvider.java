@@ -1,5 +1,7 @@
 package com.filipe.security.config;
 
+import com.filipe.security.domain.security.CustomAuthentication;
+import com.filipe.security.domain.security.IdentificacaoUsuario;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,11 +24,12 @@ public class SenhaMasterAuthenticationProvider implements AuthenticationProvider
         String senhaMaster = "@321";
 
         if (loginMaster.equals(login) && senhaMaster.equals(senha)) {
-            return new UsernamePasswordAuthenticationToken
-                    ("Sou Master",
-                            null,
-                            List.of(new SimpleGrantedAuthority("ADMIN")));
-            //Sem settar o GrantedAuthorityDefaults tem q colocar esse prefixo ROLE_ADMIN
+            IdentificacaoUsuario identificacaoUsuario = new IdentificacaoUsuario("Sou Master",
+                    "master",
+                    loginMaster,
+                    List.of("ADMIN"));
+
+            return new CustomAuthentication(identificacaoUsuario);
         }
         return null;
     }

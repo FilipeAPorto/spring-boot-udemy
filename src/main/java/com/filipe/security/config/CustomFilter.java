@@ -1,5 +1,7 @@
 package com.filipe.security.config;
 
+import com.filipe.security.domain.security.CustomAuthentication;
+import com.filipe.security.domain.security.IdentificacaoUsuario;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,13 +29,15 @@ public class CustomFilter extends OncePerRequestFilter {
 
         if (secretHeader != null) {
             if (secretHeader.equals("secr3t")) {
-                Authentication authentication = new UsernamePasswordAuthenticationToken(
+                var identificacaoUsuario = new IdentificacaoUsuario(
+                       "id-secret",
                         "Muito Secreto",
-                        null,
-                        List.of(new SimpleGrantedAuthority("USER")));
+                        "x-secr3t",
+                        List.of("USER")
+                );
+                Authentication authentication = new CustomAuthentication(identificacaoUsuario);
 
                 SecurityContext securityContext = SecurityContextHolder.getContext();
-
                 securityContext.setAuthentication(authentication);
             }
         }

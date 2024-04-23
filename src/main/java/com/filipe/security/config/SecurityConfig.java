@@ -29,6 +29,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(
             HttpSecurity http,
             SenhaMasterAuthenticationProvider senhaMasterAuthenticationProvider,
+            CustomAutheticationProvider customAutheticationProvider,
             CustomFilter customFilter) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable) //Temporário
@@ -39,6 +40,7 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults()) //Forma de Autenticação
                 .formLogin(Customizer.withDefaults()) //Forma de Autenticação
                 .authenticationProvider(senhaMasterAuthenticationProvider) //Forma de Validação
+                .authenticationProvider(customAutheticationProvider) //Forma de Validação
                 .addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

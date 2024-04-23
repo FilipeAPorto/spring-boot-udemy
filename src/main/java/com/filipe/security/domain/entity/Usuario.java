@@ -1,11 +1,9 @@
 package com.filipe.security.domain.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.Min;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -19,4 +17,7 @@ public class Usuario {
     //@Min(6) -> deu erro, possivemente essa Annotation so serve com Integer ou Double
     private String senha;
     private String nome;
+
+    @Transient //Ignora o mapeamento do SpringBoot
+    private List<String> permissoes;
 }
